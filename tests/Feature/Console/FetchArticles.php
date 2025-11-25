@@ -3,7 +3,6 @@
 namespace Feature\Console;
 
 use App\Jobs\FetchArticle;
-use App\Services\ArticlesDataStore\ArticlesHandlers;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -80,10 +79,7 @@ class FetchArticles extends TestCase
             ]),
         ]);
 
-        foreach (app(ArticlesHandlers::class)->handlers as $handler) {
-            $job = new FetchArticle($handler);
-            $job->handle();
-        }
+        $this->artisan('app:fetch-articles');
 
         $this->assertDatabaseCount('articles', 3);
     }
