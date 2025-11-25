@@ -105,7 +105,7 @@ class ArticleTest extends TestCase
             'published_at' => 'string',
             'provider' => 'string',
             'author_id' => 'integer',
-            'category_id' => 'integer',
+            'category_id' => 'integer|null',
         ]);
     }
 }
