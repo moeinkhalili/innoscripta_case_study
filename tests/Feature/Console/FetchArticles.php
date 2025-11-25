@@ -20,7 +20,7 @@ class FetchArticles extends TestCase
         Queue::assertPushed(FetchArticle::class);
     }
 
-    public function test_store_fake_data()
+    public function test_store_fake_data(): void
     {
         // Fake new york times data
         Http::fake([
