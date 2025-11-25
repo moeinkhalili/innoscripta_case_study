@@ -62,6 +62,6 @@ docker compose exec -it laravel.test php artisan test
 ```
 
 ## Notes
-- You can see database data and structures with phpmyadmin with [localhost:8001](localhost:8001).
+- You can see database data and structures with phpmyadmin with [localhost:8001](http://localhost:8001).
 - Make sure your API keys are valid and have enough quota.
 - Docker ensures a consistent environment, so the project should work the same across different machines.
