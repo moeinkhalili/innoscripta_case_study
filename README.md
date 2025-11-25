@@ -46,8 +46,8 @@ docker compose up -d
 
 5. **Set up Laravel**
 ```bash
-docker compose exec -it laravel.test php artisan key:generate
 docker compose exec -it laravel.test composer install
+docker compose exec -it laravel.test php artisan key:generate
 docker compose exec -it laravel.test php artisan migrate
 ```
 
