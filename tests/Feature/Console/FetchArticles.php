@@ -4,15 +4,12 @@ namespace Feature\Console;
 
 use App\Jobs\FetchArticle;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class FetchArticles extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_job_dispatch_when_command_runs(): void
     {
         Queue::fake();
