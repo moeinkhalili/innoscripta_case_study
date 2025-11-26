@@ -7,6 +7,7 @@ use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
@@ -14,7 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $slug
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
- * @property HasMany $preferredUsers
+ * @property HasMany $articles
+ * @property HasManyThrough $preferredUsers
  */
 class Category extends Model
 {
@@ -23,8 +25,13 @@ class Category extends Model
 
     protected $fillable = ['name', 'slug'];
 
-    public function preferredUsers(): HasMany
+    public function articles(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Article::class);
+    }
+
+    public function preferredUsers(): HasManyThrough
+    {
+        return $this->hasManyThrough(User::class, UserPreference::class, 'preferred_category_id', 'id', 'id', 'user_id');
     }
 }

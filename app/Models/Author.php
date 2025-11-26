@@ -7,13 +7,15 @@ use Database\Factories\AuthorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
  * @property string $name
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
- * @property HasMany $preferredUsers
+ * @property HasMany $articles
+ * @property HasManyThrough $preferredUsers
  */
 class Author extends Model
 {
@@ -22,8 +24,13 @@ class Author extends Model
 
     protected $fillable = ['name'];
 
-    public function preferredUsers(): HasMany
+    public function articles(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Article::class);
+    }
+
+    public function preferredUsers(): HasManyThrough
+    {
+        return $this->hasManyThrough(User::class, UserPreference::class, 'preferred_author_id', 'id', 'id', 'user_id');
     }
 }

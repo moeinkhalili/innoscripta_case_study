@@ -20,20 +20,20 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function findByUserPreferences(User $user): LengthAwarePaginator
     {
-        $prefs = UserPreference::query()->where('user_id', $user->id)->first();
+        $userPreference = UserPreference::query()->where('user_id', $user->id)->first();
 
-        if (! $prefs || (! $prefs->preferred_author_id && ! $prefs->preferred_category_id)) {
+        if (! $userPreference || (! $userPreference->preferred_author_id && ! $userPreference->preferred_category_id)) {
             return $this->index();
         }
 
         $query = Article::query()->orderBy('published_at', 'DESC');
 
-        if ($prefs->preferred_author_id) {
-            $query->where('author_id', $prefs->preferred_author_id);
+        if ($userPreference->preferred_author_id) {
+            $query->where('author_id', $userPreference->preferred_author_id);
         }
 
-        if ($prefs->preferred_category_id) {
-            $query->orWhere('category_id', $prefs->preferred_category_id);
+        if ($userPreference->preferred_category_id) {
+            $query->orWhere('category_id', $userPreference->preferred_category_id);
         }
 
         return $query->paginate();
