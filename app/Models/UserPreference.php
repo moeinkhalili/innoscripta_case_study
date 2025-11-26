@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
+ * @property int $user_id
+ * @property User $user
  * @property ?int $preferred_author_id
  * @property ?Author $preferredAuthor
  * @property ?int $preferred_category_id
@@ -27,6 +29,11 @@ class UserPreference extends Model
         'preferred_author_id',
         'preferred_category_id',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function preferredAuthor(): BelongsTo
     {
