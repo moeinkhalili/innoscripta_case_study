@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\FetchArticle;
 use App\Services\ArticlesDataStore\ArticlesHandlers;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class FetchArticles extends Command
 {
@@ -31,6 +32,7 @@ class FetchArticles extends Command
         foreach (app(ArticlesHandlers::class)->handlers as $handler) {
             dispatch_sync(new FetchArticle($handler));
         }
+        Cache::tags(['preferred-articles'])->flush();
         $this->info('Finished fetching articles from source.');
     }
 }

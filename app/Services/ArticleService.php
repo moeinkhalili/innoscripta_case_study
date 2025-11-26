@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\ArticleRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleService
 {
@@ -17,6 +18,8 @@ class ArticleService
 
     public function preferredArticles(User $user): LengthAwarePaginator
     {
-        return $this->articleRepository->findByUserPreferences($user);
+        return Cache::tags('preferred-articles')->remember("user:$user->id:preferred-articles", 15 * 60, function () use ($user) {
+            return $this->articleRepository->findByUserPreferences($user);
+        });
     }
 }
