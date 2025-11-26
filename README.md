@@ -69,6 +69,7 @@ docker compose exec -it laravel.test php artisan app:fetch-articles
 ## Running Tests
 
 ```bash
+docker compose exec -it laravel.test php artisan optimize
 docker compose exec -it laravel.test php artisan test
 ```
 
