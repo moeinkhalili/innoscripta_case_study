@@ -7,8 +7,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPreferencesController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/users/sign-up', [UserController::class, 'signUp']);
-Route::post('/users/sign-in', [UserController::class, 'signIn']);
+Route::middleware('throttle:3,1')->group(function () {
+    Route::post('/users/sign-up', [UserController::class, 'signUp']);
+    Route::post('/users/sign-in', [UserController::class, 'signIn']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/users/sign-out', [UserController::class, 'signOut']);
