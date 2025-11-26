@@ -3,12 +3,20 @@
 namespace Feature\Endpoint;
 
 use App\Models\User;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware(ThrottleRequests::class);
+    }
+
     #[DataProvider('signUpProvider')]
     public function test_sign_up(int $expectedStatusCode, ?string $name, ?string $email, ?string $password, ?bool $duplicateEmail = false): void
     {
