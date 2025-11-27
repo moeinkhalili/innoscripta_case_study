@@ -12,9 +12,4 @@ class AuthorRepository implements AuthorRepositoryInterface
     {
         return Author::query()->paginate();
     }
-
-    public function findById(int $id): ?Author
-    {
-        return Author::query()->find($id);
-    }
 }

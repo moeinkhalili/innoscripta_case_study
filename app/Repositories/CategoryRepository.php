@@ -12,9 +12,4 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::query()->paginate();
     }
-
-    public function findById(int $id): ?Category
-    {
-        return Category::query()->find($id);
-    }
 }

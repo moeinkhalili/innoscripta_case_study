@@ -22,8 +22,8 @@ class UserPreferenceService
 
         return $this->userPreferenceRepository->updateOrCreate(
             $request->user(),
-            isset($data['preferred_author_id']) ? $this->authorRepository->findById($data['preferred_author_id']) : null,
-            isset($data['preferred_category_id']) ? $this->categoryRepository->findById($data['preferred_category_id']) : null,
+            $data['preferred_author_id'] ?? null,
+            $data['preferred_category_id'] ?? null,
         );
     }
 }
