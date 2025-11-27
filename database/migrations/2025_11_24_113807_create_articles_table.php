@@ -25,7 +25,6 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
 
             $table->index(['published_at', 'provider']);
-            $table->index(['author_id', 'category_id']);
             $table->timestamps();
         });
     }
