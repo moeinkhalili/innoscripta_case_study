@@ -30,7 +30,7 @@ class FetchArticles extends Command
     {
         $this->info('Fetching articles from source...');
         foreach (app(ArticlesHandlers::class)->handlers as $handler) {
-            dispatch_sync(new FetchArticle($handler));
+            dispatch_sync(new FetchArticle(app($handler)));
         }
         Cache::tags(['preferred-articles'])->flush();
         $this->info('Finished fetching articles from source.');

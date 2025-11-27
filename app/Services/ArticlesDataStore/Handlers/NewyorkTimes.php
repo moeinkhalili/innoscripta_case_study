@@ -24,7 +24,7 @@ class NewyorkTimes implements ArticleHandler
 
     public function fetchArticles(): void
     {
-        for ($page = 1; $page <= 5; $page++) {
+        for ($page = 1; $page <= 3; $page++) {
             $response = Http::get("$this->url/svc/search/v2/articlesearch.json", [
                 'api-key' => config('articles.providers.newyorktimes.api_key'),
                 'begin_date' => $this->getFromDate()->format('Ymd'),

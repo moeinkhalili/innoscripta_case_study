@@ -28,10 +28,10 @@ class NewsApi implements ArticleHandler
             $response = Http::get("$this->url/everything", [
                 'apiKey' => config('articles.providers.newsapi.api_key'),
                 'sortby' => 'popularity',
-                'from' => $this->getFromDate(),
+                'from' => $this->getFromDate()->toISOString(),
                 'sources' => 'bild',
                 'page' => $page,
-                'pageSize' => 10,
+                'pageSize' => 20,
             ])->throw();
 
             $data = $response->json();
