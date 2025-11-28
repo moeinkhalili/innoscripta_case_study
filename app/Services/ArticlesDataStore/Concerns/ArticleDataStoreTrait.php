@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ArticlesDataStore\Traits;
+namespace App\Services\ArticlesDataStore\Concerns;
 
 use App\Models\Article;
 use Carbon\Carbon;

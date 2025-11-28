@@ -3,9 +3,9 @@
 namespace App\Services\ArticlesDataStore\Handlers;
 
 use App\Repositories\ArticleRepository;
+use App\Services\ArticlesDataStore\Concerns\ArticleDataStoreTrait;
 use App\Services\ArticlesDataStore\Contracts\ArticleHandler;
 use App\Services\ArticlesDataStore\Dto\Article;
-use App\Services\ArticlesDataStore\Traits\ArticleDataStoreTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Soundasleep\Html2Text;
